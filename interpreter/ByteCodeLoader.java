@@ -1,9 +1,13 @@
 
 package interpreter;
 
+import interpreter.bytecode.ByteCode;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 
 
 public class ByteCodeLoader extends Object {
@@ -28,6 +32,33 @@ public class ByteCodeLoader extends Object {
      *      the newly created ByteCode instance via the init function.
      */
     public Program loadCodes() {
-       return null;
+        String line;
+        String codeToken;
+        String className;
+        Class classBlueprint;
+        Constructor byteCodeConstructor;
+        ByteCode byteCode;
+        ArrayList<String> args;
+
+        try {
+            while (this.byteSource.ready()) {
+                line = this.byteSource.readLine();
+                String[] items = line.split("\\s+");
+                codeToken = items[0];
+                className = CodeTable.getClassName(codeToken);
+                classBlueprint = Class.forName("interpreter.bytecode." + className);
+                byteCodeConstructor = classBlueprint.getDeclaredConstructor();
+                byteCode = (ByteCode) byteCodeConstructor.newInstance();
+            }
+            //initialize bytecode
+            //add program object
+
+        } catch (Exception e) {
+            System.out.print(e);
+            System.exit(-1);
+        }
+        //resolve addresses
+        //return progra,
+        return null;
     }
 }
