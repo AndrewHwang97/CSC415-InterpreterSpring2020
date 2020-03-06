@@ -22,7 +22,7 @@ public class RunTimeStack {
 
         test.push(1);
         test.load(0);
-        /*
+
 
         test.push(3);
         test.push(4);
@@ -43,7 +43,7 @@ public class RunTimeStack {
         });
         System.out.println(test.peek());
 
-         */
+
         test.dump();
 
         //System.out.println();
@@ -64,9 +64,11 @@ public class RunTimeStack {
      * @return
      */
     public int pop(){
+        int returnVal;
         if(!this.runTimeStack.isEmpty()){
+            returnVal = peek();
             this.runTimeStack.remove(this.runTimeStack.size()-1);
-            return this.runTimeStack.get(this.runTimeStack.size()-1);
+            return returnVal;
         }
         return 0;
     }
@@ -88,18 +90,23 @@ public class RunTimeStack {
 
     public int store(int offset){
         int beginningOfFrame = framePointer.peek();
-        int number = this.runTimeStack.get(this.runTimeStack.size()-1);
+        int number = pop();
         runTimeStack.add(number,beginningOfFrame + offset);
         return number;
     }
 
     public void newFrameAt(int offset){
-        int index = (this.runTimeStack.size()-1) - offset;
+        int index = (this.runTimeStack.size()) - offset;
+      //  int index = (this.runTimeStack.size()-1) - offset;
         framePointer.push(index);
     }
 
     public void popFrame(){
         int beginningOfFrame = framePointer.peek();
+       // for (int i = this.runTimeStack.size()-1; i >= beginningOfFrame; i--){
+
+        //    this.runTimeStack.remove(this.runTimeStack.size()-1);
+        //}
         for (int i = this.runTimeStack.size()-1; i >= beginningOfFrame; i--){
 
             this.runTimeStack.remove(this.runTimeStack.size()-1);
@@ -138,6 +145,10 @@ public class RunTimeStack {
        // System.out.println("top: " + (this.runTimeStack.size()-1));
        // System.out.println("toppointer: " + (this.framePointer.peek()));
         return (this.runTimeStack.size()-1) - this.framePointer.peek();
+    }
+
+    public int popFramepointer(){
+        return framePointer.pop();
     }
     
 }

@@ -40,18 +40,18 @@ public class VirtualMachine {
     public int pop(){
         return runTimeStack.pop();
     }
-    public int frameBoundaryCheck(){
-        return runTimeStack.numTillBoundary();
-    }
+    public int popFramePointer(){return runTimeStack.popFramepointer();}
+    public int frameBoundaryCheck(){ return runTimeStack.numTillBoundary(); }
     public void toggleDumpON(){ isDump = true;}
     public void toggleDumpOFF(){ isDump = false;}
-    public void makeFrame(int offset){
-        runTimeStack.newFrameAt(offset);
-    }
-    public int storeToRuntimeStack(int offset){
-       return runTimeStack.store(offset);
-    }
+    public void makeFrame(int offset){ runTimeStack.newFrameAt(offset); }
+    public int storeToRuntimeStack(int offset){ return runTimeStack.store(offset); }
     public int loadFromRuntimeStack(int offset){ return runTimeStack.load(offset);}
     public void write(){System.out.println(runTimeStack.peek());}
     public void halt(){isRunning = false;}
+    public void setProgramCounter(int count) {this.programCounter = count;}
+    public void addToReturnAddressStack(int returnAddr){this.returnAddress.push(returnAddr);}
+    public int getCurrCount(){return programCounter; }
+    public  void emptyFrame() {runTimeStack.popFrame();}
+    public int popReturnAddress(){return returnAddress.pop();}
 }

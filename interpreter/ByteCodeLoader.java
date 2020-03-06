@@ -38,7 +38,8 @@ public class ByteCodeLoader extends Object {
         Class classBlueprint;
         Constructor byteCodeConstructor;
         ByteCode byteCode;
-        ArrayList<String> args;
+        ArrayList<String> args = null;
+        Program pgrm = new Program();
 
         try {
             while (this.byteSource.ready()) {
@@ -49,16 +50,25 @@ public class ByteCodeLoader extends Object {
                 classBlueprint = Class.forName("interpreter.bytecode." + className);
                 byteCodeConstructor = classBlueprint.getDeclaredConstructor();
                 byteCode = (ByteCode) byteCodeConstructor.newInstance();
-            }
-            //initialize bytecode
-            //add program object
 
+                if(items.length > 1) {
+                    ArrayList<String> tokens = new ArrayList<>();
+                    for (int i = 1; i < items.length; i++) {
+                        tokens.add(items[i]);
+                    }
+                    args = tokens;
+                }
+                byteCode.init(args);
+                pgrm.addToProgram(byteCode);
+
+            }
         } catch (Exception e) {
             System.out.print(e);
             System.exit(-1);
         }
         //resolve addresses
-        //return progra,
-        return null;
+
+        pgrm.resolveAddress();
+        return pgrm;
     }
 }

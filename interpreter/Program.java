@@ -25,21 +25,25 @@ public class Program {
      */
     public void resolveAddress() {
         HashMap<String,Integer> jumpMap = new HashMap<>();
-        ByteCode code = this.program.get(0);
-/*
+        ByteCode code;
+
         for(int i = 0; i < program.size(); i++){
+            code = this.program.get(i);
             if(code instanceof LabelCode){
+
+                jumpMap.put(program.get(i).toString(), i);
                 //look ofr all label codes and store the label and its addr
                 //in a hashmap
                 //45. Label continue<<9>>
                 // (continue<<9>>, 45)
             }
-
         }
-
-        for(){
+        for(int i = 0; i < program.size(); i++){
+            code = this.program.get(i);
             if(code instanceof JumpCode){
                 final JumpCode jc = (JumpCode) code;
+                String label = jc.getLabel();
+                jc.setAddress(jumpMap.get(label));
                 //cast the code reference to correct concrete type
                 //get label of gotocode
                 //find index of label from jump
@@ -49,11 +53,11 @@ public class Program {
             // and get the next the labels appear in the
             //program arraylist
         }
-*/
-
     }
 
-
+    public void addToProgram(ByteCode code){
+        program.add(code);
+    }
 
 
 }

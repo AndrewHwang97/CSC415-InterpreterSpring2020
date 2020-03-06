@@ -6,29 +6,29 @@ import java.util.ArrayList;
 
 public class FalseBranchCode extends JumpCode {
 
-    String id;
-    int label;
+
+    String label;
+    int jumpAddress;
     @Override
     public void execute(VirtualMachine virtualMachine) {
-
+        if(virtualMachine.pop() == 0)
+            virtualMachine.setProgramCounter(jumpAddress);
     }
 
     @Override
     public void init(ArrayList<String> args) {
-        this.label = Integer.parseInt(args.get(0));
-        if(args.size() > 1) {
-            this.id = args.get(1);
-        }
+        this.label =(args.get(0));
+    }
+
+
+    @Override
+    public void setAddress(int jumpAddress) {
+        this.jumpAddress = jumpAddress;
     }
 
     @Override
-    void setAddress(int jumpAddress) {
-
-    }
-
-    @Override
-    String getLabel() {
-        return null;
+    public String getLabel() {
+        return this.label;
     }
 
     @Override
