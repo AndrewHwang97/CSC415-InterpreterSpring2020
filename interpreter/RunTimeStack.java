@@ -16,53 +16,12 @@ public class RunTimeStack {
         // point of our language, so its frame pointer is 0.
         framePointer.add(0);
     }
-    // for testing
-    public static void main(String []args){
-        RunTimeStack test = new RunTimeStack();
 
-        test.push(1);
-        test.load(0);
-
-
-        test.push(3);
-        test.push(4);
-        test.push(5);
-        test.push(6);
-        test.push(7);
-        test.push(8);
-        test.newFrameAt(5);
-        test.newFrameAt(5);
-        test.newFrameAt(1);
-        test.pop();
-        test.pop();
-
-
-
-        test.runTimeStack.forEach((val) -> {
-            System.out.println(val);
-        });
-        System.out.println(test.peek());
-
-
-        test.dump();
-
-        //System.out.println();
-        //System.out.println(test.numTillBoundary());
-    }
-
-    /**
-     * @param valueToPush
-     * @return
-     */
     public int push(int valueToPush){
         this.runTimeStack.add(valueToPush);
         return this.runTimeStack.get(this.runTimeStack.size()-1);
     }
 
-    /**
-     *
-     * @return
-     */
     public int pop(){
         int returnVal;
         if(!this.runTimeStack.isEmpty()){
@@ -73,10 +32,6 @@ public class RunTimeStack {
         return 0;
     }
 
-    /**
-     *
-     * @return
-     */
     public int peek(){
         return this.runTimeStack.get(this.runTimeStack.size()-1);
     }
@@ -91,7 +46,7 @@ public class RunTimeStack {
     public int store(int offset){
         int beginningOfFrame = framePointer.peek();
         int number = pop();
-        runTimeStack.add(number,beginningOfFrame + offset);
+        runTimeStack.add(beginningOfFrame + offset, number);
         return number;
     }
 
