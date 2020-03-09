@@ -1,7 +1,7 @@
 # CSC 413 - Project Two - The Interpreter
 
-## Student Name  : Name here
+## Student Name  : Andrew Hwang
 
-## Student ID    : ID here
+## Student ID    : 918450486
 
-## Student Email : Email here
+## Student Email : ahwang@mail.sfsu.edu
