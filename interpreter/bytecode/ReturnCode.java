@@ -33,6 +33,6 @@ public class ReturnCode extends ByteCode {
 
     @Override
     public String toString() {
-        return "";
+        return "RETURN     EXIT " + arg + " : " + returnValue;
     }
 }

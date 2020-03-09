@@ -32,6 +32,7 @@ public class CallCode extends JumpCode {
 
     @Override
     public String toString() {
-        return "";
+        String base = "CALL " + label;
+        return base;
     }
 }

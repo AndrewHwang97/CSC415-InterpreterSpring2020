@@ -33,6 +33,7 @@ public class FalseBranchCode extends JumpCode {
 
     @Override
     public String toString() {
-        return "";
+        String base = "FALSEBRANCH " + label;
+        return base;
     }
 }

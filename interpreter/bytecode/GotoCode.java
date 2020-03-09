@@ -30,7 +30,7 @@ public class GotoCode extends JumpCode {
 
     @Override
     public String toString() {
-        return "";
+        return "GOTO " + label;
     }
 
 
